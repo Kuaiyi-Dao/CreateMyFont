@@ -1,0 +1,6 @@
+.idea/
+__pycache__/
+fz_out/
+fz_svg/
+output/
+venv/
