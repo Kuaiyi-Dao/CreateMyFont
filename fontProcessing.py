@@ -3,17 +3,20 @@ import cv2 as cv
 import numpy as npy
 import hashlib
 import imgFuntions
+import bmp2svg
 
-InfoFile = open('infoFile.txt','r')
-Info = InfoFile.read()
-if Info == '':
-	print('no infomation!')
-	exit(-1)
-keystr =b'{Info}'
-key_md5 = hashlib.md5(keystr)
-key_md5_str = str(key_md5.hexdigest())
+
 
 def main():
+	i = 0
+	InfoFile = open('infoFile.txt','r')
+	Info = InfoFile.read()
+	if Info == '':
+		print('no infomation!')
+		exit(-1)
+	keystr =Info.encode('utf-8')
+	key_md5 = hashlib.md5(keystr)
+	key_md5_str = str(key_md5.hexdigest())
 	g = os.walk("./output")
 	for path,dir_list,file_list in g:
 		for file_name in file_list:
@@ -32,9 +35,12 @@ def main():
 						if (direction != None and path != None):
 							moveCount = imgFuntions.straightEdgeChange(direction,path,key_md5_str,moveCount,imgarray,CheckArray)
 			cv.imwrite("./fz_out/"+file_name,imgarray)
-
-main()
-
+			i +=1
+			if i > 100:
+				return
+def start():
+	main()
+	bmp2svg.bmp2svg()
 
 
 

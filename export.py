@@ -1,6 +1,10 @@
 import fontforge
 F = fontforge.open('fz.TTF')
-F.reencode('GB2312')
+i = 0
 for name in F:
+    print(name)
     filename = './output/'+str(F[name].unicode) +'_'+name+ '.bmp'
     F[name].export(filename)
+    i +=1
+    if i > 100:
+        break
