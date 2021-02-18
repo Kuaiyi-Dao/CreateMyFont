@@ -8,7 +8,6 @@ import bmp2svg
 
 
 def main():
-	i = 0
 	InfoFile = open('infoFile.txt','r')
 	Info = InfoFile.read()
 	if Info == '':
@@ -35,9 +34,6 @@ def main():
 						if (direction != None and path != None):
 							moveCount = imgFuntions.straightEdgeChange(direction,path,key_md5_str,moveCount,imgarray,CheckArray)
 			cv.imwrite("./fz_out/"+file_name,imgarray)
-			i +=1
-			if i > 100:
-				return
 def start():
 	main()
 	bmp2svg.bmp2svg()
